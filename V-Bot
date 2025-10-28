@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Non-Veg Table — Chatbot</title>
+    <style>
+      :root{
+        --accent:#d35400;
+        --bg:#faf7f2;
+        --card:#ffffff;
+        --muted:#666;
+      }
+      body{font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:var(--bg); margin:0; color:#111}
+      .container{max-width:1100px;margin:40px auto;padding:24px}
+      header{display:flex;align-items:center;gap:16px}
+      .logo{width:64px;height:64px;border-radius:10px;background:linear-gradient(135deg,#ff8a00,#ff4757);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:20px}
+      h1{margin:0;font-size:28px}
+      p.lead{color:var(--muted);margin-top:6px}
+      .card{background:var(--card);border-radius:12px;padding:18px;margin-top:18px;box-shadow:0 6px 18px rgba(20,20,30,0.06)}
+      .grid{display:grid;grid-template-columns:1fr 360px;gap:18px}
+      .left{padding:12px}
+      .right{padding:12px}
+      .feature-list{display:flex;flex-direction:column;gap:8px}
+      .feature{padding:10px;border-radius:8px;background:#fbfbfb;border:1px solid #f0f0f0}
+      .btn{display:inline-block;padding:10px 14px;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none}
+      footer{margin-top:18px;color:var(--muted);font-size:14px}
+      /* Small screens */
+      @media (max-width:880px){
+        .grid{grid-template-columns:1fr}
+        .right{order:-1}
+      }
+      .code{font-family:monospace;background:#0f1724;color:#cde; padding:10px;border-radius:8px;overflow:auto}
+      .hint{font-size:13px;color:#444}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="logo">NVT</div>
+        <div>
+          <h1>Non-Veg Table — Chatbot</h1>
+          <p class="lead">A simple webpage that embeds your Watson Assistant chat widget. Try it locally or deploy to any static hosting.</p>
+        </div>
+      </header>
+
+      <div class="card grid">
+        <div class="left">
+          <h3>How it works</h3>
+          <p class="hint">This page includes the Watson Assistant web-chat script you provided. When the page loads the Watson chat widget will be injected and rendered. Below are a few recommended suggestions for user-friendly behavior and integration tips.</p>
+
+          <div class="feature-list">
+            <div class="feature"><strong>Suggested greeting examples</strong><br/>"Hi", "Hello Chef", "I want chicken recipes" — use these as training examples in your assistant.</div>
+            <div class="feature"><strong>Accessibility</strong><br/>Add ARIA labels and keyboard shortcuts if users expect quick chat access.</div>
+            <div class="feature"><strong>Mobile</strong><br/>Widget is responsive, but test on small screens to ensure it does not cover critical UI elements.</div>
+          </div>
+
+          <h3 style="margin-top:18px">Local testing</h3>
+          <p class="hint">Save this file as <code>nonveg-bot.html</code> and open it in a browser. If the assistant doesn't appear, check your integration ID, region and serviceInstanceID in the Watson script and network console for blocked resources.</p>
+
+          <h3 style="margin-top:18px">Snippet used</h3>
+          <pre class="code">&lt;script&gt;
+  window.watsonAssistantChatOptions = {
+    integrationID: "c7b27aad-c948-4c8e-abf2-a82683c94d50", // The ID of this integration.
+    region: "eu-de", // The region your integration is hosted in.
+    serviceInstanceID: "1a9cdea9-a979-49d6-bb27-eba3ca7700b1", // The ID of your service instance.
+    onLoad: async (instance) =&gt; { await instance.render(); }
+  };
+  setTimeout(function(){
+    const t=document.createElement('script');
+    t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+    document.head.appendChild(t);
+  });
+&lt;/script&gt;</pre>
+
+        </div>
+
+        <div class="right">
+          <h3>Live chat</h3>
+          <div class="card" style="min-height:220px;display:flex;align-items:center;justify-content:center">
+            <div>
+              <p style="margin:0 0 8px 0">The Watson chat widget will appear automatically when the script loads.</p>
+              <p style="margin:0 0 12px 0" class="hint">If you want a manual launcher button, use the sample below.</p>
+
+              <button id="open-chat" class="btn">Open Chat</button>
+
+            </div>
+          </div>
+
+          <h4 style="margin-top:14px">Quick customization</h4>
+          <ul style="margin:8px 0 0 18px;color:var(--muted)">
+            <li>Change <code>integrationID</code>, <code>region</code>, <code>serviceInstanceID</code> to yours.</li>
+            <li>Adjust <code>onLoad</code> callback to pre-fill context or set user attributes.</li>
+            <li>Use CSS to hide/show default launcher if you prefer a custom button.</li>
+          </ul>
+
+          <footer>
+            <small>Built for Non‑Veg Table • Keep your integration credentials private.</small>
+          </footer>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Watson Assistant script (embedded as you provided) -->
+    <script>
+  window.watsonAssistantChatOptions = {
+    integrationID: "c7b27aad-c948-4c8e-abf2-a82683c94d50", // The ID of this integration.
+    region: "eu-de", // The region your integration is hosted in.
+    serviceInstanceID: "1a9cdea9-a979-49d6-bb27-eba3ca7700b1", // The ID of your service instance.
+    onLoad: async (instance) => { await instance.render(); }
+  };
+  setTimeout(function(){
+    const t=document.createElement('script');
+    t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+    document.head.appendChild(t);
+  });
+    </script>
+
+    <script>
+      // Example: custom open button that toggles the Watson widget if available
+      document.getElementById('open-chat').addEventListener('click', async function(){
+        try{
+          if(window.WatsonAssistantChat){
+            const instance = await WatsonAssistantChat.open();
+            return;
+          }
+          // If the global helper isn't available yet, attempt to render from options
+          if(window.watsonAssistantChatOptions){
+            // render will be called automatically by original script's onLoad, but we try to be safe
+            console.warn('Widget not ready yet — it should appear automatically.');
+          }
+        }catch(e){
+          console.error(e);
+        }
+      });
+    </script>
+
+  </body>
+</html>
